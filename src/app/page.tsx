@@ -11,11 +11,11 @@ export default function Home() {
         <p className='text-3xl'>Hello my name is <span className='text-purple-600 font-bold'>Pragya Pokharel</span></p>
         <p className='text-xl text-gray-400 font-medium'>Child development specialist</p>
         <p className='mt-4 text-gray-400'>I'm a social work professional who believes in egalitarian society and does any thing to move present society towards what I believe.</p>
-        <Link target="__blank" href='https://www.linkedin.com/in/pragya-pokharel/' className='mt-10'>
           <Button className='w-14 h-14'>
-            <Linkedin />
+            <Link target="__blank" href='https://www.linkedin.com/in/pragya-pokharel/' className=''>
+              <Linkedin />
+            </Link>
           </Button>
-        </Link>
       </div>
       <Image src='/images/hero.jpg' width={1920} height={1080} alt='hero picture' className='hidden md:block'/>
 
