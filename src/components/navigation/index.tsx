@@ -21,68 +21,79 @@ import { DialogTitle } from "@radix-ui/react-dialog"
 
 const menuOptions = [
     {
-        name: "Home"
+        name: "Home",
+        link: '/'
     },
     {
-        name: "About"
+        name: "About",
+        link: '/'
     },
     {
-        name: "Portfolio"
+        name: "Portfolio",
+        link: '/'
     },
     {
-        name: "Blog"
+        name: "Blog",
+        link: '/'
     },
     {
-        name: "Contact"
+        name: "Contact",
+        link: '/'
     },
 ]
 
 export function NavigationMenuDemo() {
   return (
-    <div>
-
-    <div className='hidden sticky top-0 md:flex justify-center items-center w-screen bg-white py-4'>
-    <NavigationMenu >
-      <NavigationMenuList>
-        {
-            menuOptions.map((menuOption,i)=>(
-                <NavigationMenuItem key={i}>
-                    <Link href="/docs" legacyBehavior passHref>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        {menuOption.name}
-                        </NavigationMenuLink>
-                    </Link>
-                    </NavigationMenuItem>
-
-            ))
-        }
-        </NavigationMenuList>
-    </NavigationMenu>
-   
+    <div className=''>
+    <div className='hidden sticky top-0 md:flex justify-between items-center w-screen bg-white shadow py-4'>
+        <Link href="/">
+            <div className='border rounded-lg flex text-center ml-6 bg-primary w-12 h-12 items-center justify-center'>
+                <p className='text-2xl text-white font-bold px-2'>P</p>
+            </div>
+        </Link>
+        <NavigationMenu >
+            <NavigationMenuList>
+            {
+                menuOptions.map((menuOption,i)=>(
+                    <NavigationMenuItem key={i}>
+                        <Link href={menuOption.link} legacyBehavior passHref>
+                            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                            {menuOption.name}
+                            </NavigationMenuLink>
+                        </Link>
+                        </NavigationMenuItem>
+                ))
+            }
+            </NavigationMenuList>
+        </NavigationMenu>
+        <div/>
     </div>
+    
     <div className='block md:hidden absolute left-4 top-4 z-50'>
-        <Sheet>
-            <SheetTrigger asChild>
-                <Button className='w-12 h-12 p-0' variant={"ghost"}>
-                    <MenuIcon/>
-                </Button>
-            </SheetTrigger>
-            <SheetContent side={"left"} className='px-0'>
-                <SheetHeader className='text-xl mb-10'>Menu</SheetHeader>
-                <SheetTitle>{}</SheetTitle>
-                <SheetDescription>{""}</SheetDescription>
-                {
-                    menuOptions.map((menuOption,i)=>(
-                        <SheetTrigger asChild key={i} className='hover:bg-gray-200'>
-                            <div className='flex flex-col text-xl'>
-                                <p className='py-4 px-8 rounded'>{menuOption.name}</p>
-                            </div>
-                        </SheetTrigger>
-                    ))
-                }
-            </SheetContent>
-        </Sheet>
-    </div>
+            <Sheet>
+                <SheetTrigger asChild>
+                    <Button className='w-12 h-12 p-0' variant={"ghost"}>
+                        <MenuIcon/>
+                    </Button>
+                </SheetTrigger>
+                <SheetContent side={"left"} className='px-0'>
+                    <SheetHeader className='text-xl mb-10'>Menu</SheetHeader>
+                    <SheetTitle>{}</SheetTitle>
+                    <SheetDescription>{""}</SheetDescription>
+                    {
+                        menuOptions.map((menuOption,i)=>(
+                            <SheetTrigger asChild key={i} className='hover:bg-gray-200'>
+                                <Link href={menuOption.link}>
+                                    <div className='flex flex-col text-xl'>
+                                        <p className='py-4 px-8 rounded'>{menuOption.name}</p>
+                                    </div>
+                                </Link>
+                            </SheetTrigger>
+                        ))
+                    }
+                </SheetContent>
+            </Sheet>
+        </div>
     </div>
   )
 }
