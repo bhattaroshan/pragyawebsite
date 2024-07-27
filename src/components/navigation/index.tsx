@@ -25,8 +25,23 @@ const menuOptions = [
         link: '/'
     },
     {
-        name: "About",
-        link: '/'
+        name: "About Me",
+        link: '/',
+        subcategories: [
+          {
+            name: 'Educator',
+            link: '/aboutme/educator',
+          },
+          {
+            name: 'Storyteller',
+            link: '/aboutme/storyteller',
+          },
+          {
+            name: 'Social Worker',
+            link: '/aboutme/social-worker',
+          },
+        ]
+          
     },
     {
         name: "Portfolio",
@@ -45,7 +60,7 @@ const menuOptions = [
 export function NavigationMenuDemo() {
   return (
     <div className=''>
-    <div className='hidden sticky top-0 md:flex justify-between items-center w-screen bg-white shadow py-4'>
+    <div className='hidden sticky top-0 md:flex justify-between items-center w-screen bg-white shadow-sm py-4'>
         <Link href="/">
             <div className='border rounded-lg flex text-center ml-6 bg-primary w-12 h-12 items-center justify-center'>
                 <p className='text-2xl text-white font-bold px-2'>P</p>
@@ -55,13 +70,27 @@ export function NavigationMenuDemo() {
             <NavigationMenuList>
             {
                 menuOptions.map((menuOption,i)=>(
+                    !menuOption.subcategories ?
                     <NavigationMenuItem key={i}>
                         <Link href={menuOption.link} legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                             {menuOption.name}
                             </NavigationMenuLink>
                         </Link>
-                        </NavigationMenuItem>
+                    </NavigationMenuItem>
+                    :
+                    <NavigationMenuItem className=''>
+                    <NavigationMenuTrigger className=''>{menuOption.name}</NavigationMenuTrigger>
+                    <NavigationMenuContent >
+                      {
+                        menuOption.subcategories.map((subcategory,idx)=>{
+                          return <Link key={idx} href={subcategory.link}>
+                                  <ListItem>{subcategory.name}</ListItem>
+                                </Link>
+                        })
+                      }
+                    </NavigationMenuContent>
+            </NavigationMenuItem>
                 ))
             }
             </NavigationMenuList>
