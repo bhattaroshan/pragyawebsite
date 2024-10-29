@@ -25,9 +25,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <div className='relative w-screen'>
+        <div className='w-screen'>
           <NavigationMenuDemo />
-          {children}
+          <div className=''>
+            {children}
+          </div>
         </div>
         </body>
     </html>
