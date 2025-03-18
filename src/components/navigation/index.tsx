@@ -64,7 +64,7 @@ const menuOptions = [
 export function NavigationMenuDemo() {
   return (
     <div className=''>
-    <div className='hidden sticky top-0 md:flex justify-between items-center w-screen bg-white shadow-sm py-4'>
+    <div className='hidden sticky top-0 md:flex justify-between items-center w-screen bg-white shadow-sm py-4 z-[50]'>
         <Link href="/">
             <div className='border rounded-lg flex text-center ml-6 bg-primary w-12 h-12 items-center justify-center'>
                 <p className='text-2xl text-white font-bold px-2'>P</p>
@@ -85,12 +85,10 @@ export function NavigationMenuDemo() {
                     :
                     <NavigationMenuItem className='' key={i}>
                     <NavigationMenuTrigger className=''>{menuOption.name}</NavigationMenuTrigger>
-                    <NavigationMenuContent >
+                    <NavigationMenuContent className="">
                       {
                         menuOption.subcategories.map((subcategory,idx)=>{
-                          return <Link key={idx} href={subcategory.link}>
-                                  <ListItem>{subcategory.name}</ListItem>
-                                </Link>
+                          return <ListItem key={idx} href={subcategory.link}>{subcategory.name}</ListItem>
                         })
                       }
                     </NavigationMenuContent>
@@ -102,7 +100,7 @@ export function NavigationMenuDemo() {
         <div/>
     </div>
     
-    <div className='block md:hidden absolute left-4 top-4 z-50'>
+    <div className='block md:hidden absolute left-4 top-4'>
             <Sheet>
                 <SheetTrigger asChild>
                     <Button className='w-12 h-12 p-0' variant={"ghost"}>
@@ -115,13 +113,13 @@ export function NavigationMenuDemo() {
                     <SheetDescription>{""}</SheetDescription>
                     {
                         menuOptions.map((menuOption,i)=>(
-                            <SheetTrigger asChild key={i} className='hover:bg-gray-200'>
-                                <Link href={menuOption.link}>
+                            // <SheetTrigger asChild key={i} className='hover:bg-gray-200'>
+                                <Link href={menuOption.link} key={i}>
                                     <div className='flex flex-col text-xl'>
                                         <p className='py-4 px-8 rounded'>{menuOption.name}</p>
                                     </div>
                                 </Link>
-                            </SheetTrigger>
+                            // </SheetTrigger>
                         ))
                     }
                 </SheetContent>
@@ -131,28 +129,27 @@ export function NavigationMenuDemo() {
   )
 }
 
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
+const ListItem = (({ className, title, children, href, ...props }:{className?:string,title?:string,children:React.ReactNode, href:string}) => {
   return (
-    <li>
       <NavigationMenuLink asChild>
-        <a
-          ref={ref}
+        <Link
+          href={href}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block select-none space-y-1 p-3 leading-none no-underline outline-none transition-colors hover:bg-primary-light-faded hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
           )}
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <div className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
-          </p>
-        </a>
+          </div>
+        </Link>
       </NavigationMenuLink>
-    </li>
   )
 })
-ListItem.displayName = "ListItem"
+
+// ListItem.displayName = "ListItem"
+
+
+export default ListItem;
