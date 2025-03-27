@@ -3,13 +3,13 @@ import CustomImage from "@/components/CustomImage";
 const blogs = [
     {
         title: 'Keleidoscope',
-        image:'/blogs/dang_cover.webp',
+        image:'/blogs/kaleidoscope_cover.jpg',
         url: '/',
         content: 'Hello my name is pragya'
     },
     {
         title: 'Stories of Dang',
-        image:'/blogs/kaleidoscope_cover.jpg',
+        image:'/blogs/dang_cover.webp',
         url: '/',
         content: 'Hello my name is pragya'
     },
