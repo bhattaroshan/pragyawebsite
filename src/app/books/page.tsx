@@ -1,8 +1,11 @@
 import React from 'react';
 import { books } from './data';
-import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import Image from "next/image";
+import { BookOpen, Star } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -28,50 +31,69 @@ function StarRating({ rating }: { rating: number }) {
 
 function BookCard({ book }: { book: typeof books[0] }) {
   return (
-    <Card className="overflow-hidden h-full">
-      <div className="relative h-64">
-        <img
-          src={book.coverImage}
-          alt={book.title}
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <CardHeader>
-        <div className="space-y-1">
-          <h3 className="text-2xl font-semibold leading-none tracking-tight">{book.title}</h3>
-          <p className="text-sm text-muted-foreground">{book.author}</p>
-        </div>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <StarRating rating={book.rating} />
-        <ScrollArea className="h-24">
-          <p className="text-muted-foreground">{book.description}</p>
-        </ScrollArea>
-        <div className="flex flex-wrap gap-2">
-          {book.genre.map((tag) => (
-            <Badge key={tag} variant="secondary">
-              {tag}
-            </Badge>
-          ))}
+    <Card className="group hover:shadow-lg transition-all duration-300">
+      <CardContent className="p-4">
+        <div className="flex flex-col h-full">
+          {/* Book Cover Container */}
+          <div className="relative w-full aspect-[2/3] mb-4 bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden">
+            <Image
+              src={book.coverImage}
+              alt={book.title}
+              fill
+              className="object-contain p-2"
+            />
+          </div>
+          
+          {/* Book Info */}
+          <div className="flex-1 flex flex-col">
+            <h3 className="font-semibold line-clamp-2 mb-1">{book.title}</h3>
+            <p className="text-sm text-muted-foreground mb-2">{book.author}</p>
+            
+            {/* Rating */}
+            <div className="flex items-center gap-1 mb-2">
+              {[...Array(5)].map((_, i) => (
+                <Star
+                  key={i}
+                  className={cn(
+                    "h-4 w-4",
+                    i < book.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                  )}
+                />
+              ))}
+            </div>
+
+            {/* Tags */}
+            <div className="flex flex-wrap gap-1 mt-auto">
+              {book.genre.map((tag) => (
+                <Badge key={tag} variant="secondary" className="text-xs">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </div>
         </div>
       </CardContent>
-      <CardFooter>
-        <p className="text-sm text-muted-foreground">
-          Read on {new Date(book.readDate).toLocaleDateString()}
-        </p>
-      </CardFooter>
     </Card>
   );
 }
 
 export default function BooksPage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8 py-20 md:py-8">
-      <h1 className="text-4xl font-bold">My Reading List</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {books.map((book) => (
-          <BookCard key={book.id} book={book} />
-        ))}
+    <div className="container mx-auto px-4 py-8">
+      <div className="max-w-3xl mx-auto">
+        <div className="flex items-center gap-2 mb-8">
+          <BookOpen className="h-8 w-8 text-primary" />
+          <h1 className="text-4xl font-bold">Books</h1>
+        </div>
+        <p className="text-muted-foreground mb-12">
+          A collection of books I've read and enjoyed
+        </p>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {books.map((book) => (
+            <BookCard key={book.title} book={book} />
+          ))}
+        </div>
       </div>
     </div>
   );
