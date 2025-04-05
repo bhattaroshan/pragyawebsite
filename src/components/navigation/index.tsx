@@ -72,7 +72,7 @@ export function NavigationMenuDemo() {
   }
 
   return (
-    <div className=''>
+    <div className='my-20 md:my-2'>
       <div className='hidden sticky top-0 md:flex justify-between items-center w-screen bg-white shadow-sm py-4 z-[50]'>
         <Link href="/">
           <div className='border rounded-lg flex text-center ml-6 bg-primary w-12 h-12 items-center justify-center'>

@@ -16,7 +16,7 @@ const blogs = [
 ]
 
 export default function StorytellerPage(){
-    return <div className='grid grid-cols-12 gap-6 md:gap-2 m-2 w-[90vw] sm:w-[80vw] md:w-[60vw] mx-auto my-20 md:my-2 justify-center'>
+    return <div className='grid grid-cols-12 gap-6 md:gap-2 m-2 w-[90vw] sm:w-[80vw] md:w-[60vw] mx-auto justify-center'>
             {
                 blogs.map((blog,index)=>{
                     return <div key={index} className="col-span-12 md:col-span-4 cursor-pointer">
