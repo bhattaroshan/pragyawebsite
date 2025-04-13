@@ -46,6 +46,10 @@ const menuOptions = [
         ]
     },
     {
+      name: "Academics",
+      link: '/experience/academics',
+  },
+    {
       name: "Books",
       link: '/books'
     },
@@ -59,7 +63,7 @@ const menuOptions = [
     },
     {
         name: "Contact",
-        link: '/'
+        link: '/contact'
     },
 ]
 
