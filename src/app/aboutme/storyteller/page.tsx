@@ -1,31 +1,43 @@
 import CustomImage from "@/components/CustomImage";
+import Link from "next/link";
 
 const blogs = [
     {
-        title: 'Keleidoscope',
+        title: 'Kaleidoscope',
         image:'/blogs/kaleidoscope_cover.jpg',
-        url: '/',
+        url: '/aboutme/storyteller/kaleidoscope',
         content: 'Hello my name is pragya'
     },
     {
         title: 'Stories of Dang',
         image:'/blogs/dang_cover.webp',
-        url: '/',
+        url: '/aboutme/storyteller/dang',
         content: 'Hello my name is pragya'
     },
 ]
 
 export default function StorytellerPage(){
-    return <div className='grid grid-cols-12 gap-6 md:gap-2 m-2 w-[90vw] sm:w-[80vw] md:w-[60vw] mx-auto justify-center'>
-            {
-                blogs.map((blog,index)=>{
-                    return <div key={index} className="col-span-12 md:col-span-4 cursor-pointer">
-                        <div>
-                            <CustomImage url={blog.image} className='h-44 md:h-40 object-cover'/>
-                            <p>{blog.title}</p>
+    return (
+        <div className="min-h-screen">
+            <div className="flex flex-col md:flex-row h-screen">
+                {blogs.map((blog, index) => (
+                    <Link 
+                        href={blog.url} 
+                        key={index} 
+                        className="relative flex-1 group cursor-pointer overflow-hidden"
+                    >
+                        <CustomImage 
+                            url={blog.image} 
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <h2 className="text-white text-3xl md:text-4xl font-bold text-center p-4">
+                                {blog.title}
+                            </h2>
                         </div>
-                        </div>
-                })
-            }
-    </div>
+                    </Link>
+                ))}
+            </div>
+        </div>
+    );
 }

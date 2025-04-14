@@ -1,10 +1,35 @@
-"use client"
+'use client'
 
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetClose
+} from "@/components/ui/sheet"
+import { 
+  Menu, 
+  ChevronDown, 
+  Home, 
+  GraduationCap, 
+  Code2, 
+  BookOpen, 
+  Plane, 
+  Languages, 
+  Music, 
+  Briefcase, 
+  User,
+  Video,
+  Book,
+  PenTool,
+} from "lucide-react"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,185 +37,239 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
-import { MenuIcon } from "lucide-react"
-import { Button } from "../ui/button"
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet"
 
-const menuOptions = [
-    {
-        name: "Home",
-        link: '/'
-    },
-    {
-        name: "About Me",
-        link: '/',
-        subcategories: [
-          {
-            name: 'Educator',
-            link: '/aboutme/educator',
-          },
-          {
-            name: 'Storyteller',
-            link: '/aboutme/storyteller',
-          },
-          {
-            name: 'Social Worker',
-            link: '/aboutme/social-worker',
-          },
-          {
-            name: 'Traveller',
-            link: '/aboutme/traveller',
-          },
-        ]
-    },
-    {
-      name: "Academics",
-      link: '/experience/academics',
+const routes = [
+  {
+    href: "/",
+    label: "Home",
+    icon: Home
+  }, 
+  {
+    href: "/",
+    label: "About Me",
+    icon: GraduationCap,
+    subItems: [
+      {
+        href: "/aboutme/educator",
+        label: "Educator",
+        icon: GraduationCap
+      },
+      {
+        href: "/aboutme/storyteller",
+        label: "Storyteller",
+        icon: Book
+      },
+      {
+        href: "/aboutme/social-worker",
+        label: "Social Worker",
+        icon: GraduationCap
+      },
+      {
+        href: "/aboutme/traveller",
+        label: "Traveller",
+        icon: Plane
+      },
+    ]
   },
-    {
-      name: "Books",
-      link: '/books'
-    },
-    {
-        name: "Portfolio",
-        link: '/'
-    },
-    {
-        name: "Blog",
-        link: '/'
-    },
-    {
-        name: "Contact",
-        link: '/contact'
-    },
+  {
+    href: "/experience/academics",
+    label: "Academics",
+    icon: Briefcase
+  },
+  {
+    href: "/books",
+    label: "Books",
+    icon: Book
+  },
+  {
+    href: "/blog",
+    label: "Blog",
+    icon: PenTool
+  },
+  {
+    href: "/contact",
+    label: "Contact Me",
+    icon: User
+  },
 ]
 
-export function NavigationMenuDemo() {
-  const [open, setOpen] = React.useState(false)
+function DesktopNav() {
   const pathname = usePathname()
 
-  const handleLinkClick = () => {
-    setOpen(false)
-  }
-
   return (
-    <div className='my-20 md:my-2'>
-      <div className='hidden sticky top-0 md:flex justify-between items-center w-screen bg-white shadow-sm py-4 z-[50]'>
-        <Link href="/">
-          <div className='border rounded-lg flex text-center ml-6 bg-primary w-12 h-12 items-center justify-center'>
-            <p className='text-2xl text-white font-bold px-2'>P</p>
-          </div>
-        </Link>
-        <NavigationMenu>
-          <NavigationMenuList>
-            {menuOptions.map((menuOption, i) => (
-              !menuOption.subcategories ? (
-                <NavigationMenuItem key={i}>
-                  <Link href={menuOption.link} legacyBehavior passHref>
-                    <NavigationMenuLink 
-                      className={cn(
-                        navigationMenuTriggerStyle(),
-                        pathname === menuOption.link && "text-primary"
-                      )}
-                    >
-                      {menuOption.name}
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-              ) : (
-                <NavigationMenuItem key={i}>
-                  <NavigationMenuTrigger>{menuOption.name}</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    {menuOption.subcategories.map((subcategory, idx) => (
-                      <ListItem 
-                        key={idx} 
-                        href={subcategory.link}
-                        className={pathname === subcategory.link ? "text-primary" : ""}
-                      >
-                        {subcategory.name}
-                      </ListItem>
+  
+    <NavigationMenu>
+      <NavigationMenuList>
+        {routes.map((route) => {
+          if (route.subItems) {
+            return (
+              <NavigationMenuItem key={route.label}>
+                <NavigationMenuTrigger className="inline-flex h-9 w-max items-center justify-center text-muted-foreground rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                  {route.label}
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[200px] gap-1 p-2">
+                    {route.subItems.map((item) => (
+                      <li key={item.href}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            href={item.href}
+                            className={cn(
+                              "flex items-center gap-2 select-none rounded-sm px-2 py-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                              pathname === item.href
+                                ? "bg-accent text-accent-foreground"
+                                : "text-muted-foreground"
+                            )}
+                          >
+                            <item.icon className="h-4 w-4" />
+                            {item.label}
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
                     ))}
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              )
-            ))}
-          </NavigationMenuList>
-        </NavigationMenu>
-        <div/>
-      </div>
-    
-      <div className='block md:hidden absolute left-4 top-4'>
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger asChild>
-            <Button className='w-12 h-12 p-0' variant="ghost">
-              <MenuIcon/>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className='px-0'>
-            <SheetHeader className='text-xl mb-10'>Menu</SheetHeader>
-            {menuOptions.map((menuOption, i) => (
-              menuOption.subcategories ? (
-                <div key={i} className="flex flex-col">
-                  <p className='py-4 px-8 rounded font-semibold'>{menuOption.name}</p>
-                  <div className="pl-8">
-                    {menuOption.subcategories.map((subcategory, idx) => (
-                      <Link 
-                        href={subcategory.link} 
-                        key={idx} 
-                        onClick={handleLinkClick}
-                        className={cn(
-                          'block py-2 px-4 rounded text-muted-foreground',
-                          pathname === subcategory.link && "text-primary"
-                        )}
-                      >
-                        {subcategory.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <Link 
-                  href={menuOption.link} 
-                  key={i} 
-                  onClick={handleLinkClick}
-                  className={cn(
-                    'block py-4 px-8 rounded',
-                    pathname === menuOption.link && "text-primary"
-                  )}
-                >
-                  {menuOption.name}
-                </Link>
-              )
-            ))}
-          </SheetContent>
-        </Sheet>
-      </div>
-    </div>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            )
+          }
+          return (
+            <NavigationMenuItem key={route.href}>
+              <Link
+                href={route.href}
+                className={cn(
+                  "inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
+                  pathname === route.href
+                    ? "text-primary"
+                    : "text-muted-foreground"
+                )}
+              >
+                {route.label}
+              </Link>
+            </NavigationMenuItem>
+          )
+        })}
+      </NavigationMenuList>
+    </NavigationMenu>
   )
 }
 
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { href: string }
->(({ className, children, href, ...props }, ref) => {
-  return (
-    <NavigationMenuLink asChild>
-      <Link
-        ref={ref}
-        href={href}
-        className={cn(
-          "block select-none space-y-1 p-3 leading-none no-underline outline-none transition-colors hover:bg-primary-light-faded hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-          className
-        )}
-        {...props}
-      >
-        <div className="text-sm font-medium leading-none">{children}</div>
-      </Link>
-    </NavigationMenuLink>
-  )
-})
-ListItem.displayName = "ListItem"
+function MobileNav() {
+  const pathname = usePathname()
+  const [openSubMenus, setOpenSubMenus] = React.useState<string[]>([])
 
-export default ListItem
+  const toggleSubMenu = (label: string) => {
+    setOpenSubMenus(prev =>
+      prev.includes(label)
+        ? prev.filter(item => item !== label)
+        : [...prev, label]
+    )
+  }
+
+  return (
+    <nav className="flex flex-col space-y-2 mt-4">
+      {routes.map((route) => {
+        if (route.subItems) {
+          const isOpen = openSubMenus.includes(route.label)
+          return (
+            <div key={route.label} className="space-y-2">
+              <button
+                onClick={() => toggleSubMenu(route.label)}
+                className="flex items-center justify-between w-full px-2 py-2 text-lg text-muted-foreground hover:text-primary"
+              >
+                <div className="flex items-center gap-2">
+                  <route.icon className="h-5 w-5" />
+                  {route.label}
+                </div>
+                <ChevronDown className={cn(
+                  "h-4 w-4 transition-transform",
+                  isOpen && "transform rotate-180"
+                )} />
+              </button>
+              {isOpen && (
+                <div className="pl-4 space-y-2">
+                  {route.subItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={cn(
+                        "flex items-center gap-2 px-2 py-2 text-lg transition-colors hover:text-primary",
+                        pathname === item.href
+                          ? "font-medium text-primary"
+                          : "text-muted-foreground"
+                      )}
+                    >
+                      <item.icon className="h-5 w-5" />
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          )
+        }
+        return (
+          <Link
+            key={route.href}
+            href={route.href}
+            className={cn(
+              "flex items-center gap-2 px-2 py-2 text-lg transition-colors hover:text-primary",
+              pathname === route.href
+                ? "font-medium text-primary"
+                : "text-muted-foreground"
+            )}
+          >
+            <route.icon className="h-5 w-5" />
+            {route.label}
+          </Link>
+        )
+      })}
+    </nav>
+  )
+}
+
+export function Navbar() {
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = React.useState(false)
+
+
+  React.useEffect(()=>{
+    setIsOpen(false);
+  },[pathname])
+
+  return (
+    <header className="sticky md:z-[1000] bg-white top-0 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-14 items-center p-0 md:p-4">
+        <div className="md:hidden">
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <div className='relative flex items-center w-screen'>
+                <Button variant="ghost" size="icon" className="mr-2">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Toggle Menu</span>
+                </Button>
+                <div className='absolute left-1/2 transform -translate-x-1/2'>
+                  <Link href="/" className="text-primary font-bold">PRAGYA</Link>
+                </div>
+              </div>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[240px] pr-0">
+              <SheetHeader>
+                <SheetTitle>Pragya Pokharel</SheetTitle>
+                <SheetDescription>
+                  {""}
+                </SheetDescription>
+              </SheetHeader>
+              <MobileNav />
+            </SheetContent>
+          </Sheet>
+        </div>
+        <div className="hidden md:flex items-center space-x-4 justify-between w-screen">
+          <Link href="/" className="text-primary font-bold">PRAGYA</Link>
+          <DesktopNav />
+          <div/>
+        </div>
+      </div>
+    </header>
+  )
+} 
