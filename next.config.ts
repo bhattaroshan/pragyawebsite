@@ -4,7 +4,9 @@ import { NextConfig } from "next";
 
 const nextConfig = {
   images: {
-    domains: ['miro.medium.com'],
+    domains: ['roshan-personalwebsite.s3.ap-south-1.amazonaws.com',
+            'pragya-personalwebsite.s3.ap-south-1.amazonaws.com',
+      'miro.medium.com'],
   },
 };
 

@@ -146,7 +146,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-sm">Location</h3>
-                      <p className="text-muted-foreground text-sm">Kathmandu, Nepal</p>
+                      <p className="text-muted-foreground text-sm">Nebraska, Lincoln</p>
                     </div>
                   </div>
                 </div>
