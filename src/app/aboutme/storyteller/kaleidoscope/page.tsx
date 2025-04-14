@@ -9,64 +9,7 @@ import Link from "next/link"
 import { title } from "process"
 
 const blogPosts = [
-  {
-    title: "Dreams Beyond the Fields",
-    description: "",
-    image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*SKUBZ1kxRr6eBcxW.jpg",
-    date: "May 10, 2023",
-    readTime: "2 min read",
-    tags: [],
-    url: "https://medium.com/@pragyapokharel07_41704/dreams-beyond-the-fields-63e1c1db8868",
-    imageShift: 0 // No shift
-  },
-  {
-    title: "Finding My Voice",
-    description: "",
-    image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*VwkJCA1Iwx0d5ICp.jpg",
-    date: "May 10, 2023",
-    readTime: "1 min read",
-    tags: [],
-    url: "https://medium.com/@pragyapokharel07_41704/finding-my-voice-4a8aa3713fd5",
-  },
-  {
-    title: "Walking Miles for a Future",
-    description: "",
-    image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*pvwOJtsjdYiMPMLg.jpg",
-    date: "May 10, 2023",
-    readTime: "2 min read",
-    tags: [],
-    url: "https://medium.com/@pragyapokharel07_41704/walking-miles-for-a-future-00506cefb654",
-    imageShift: 10
-  },
-  {
-    title: "Building Bridges with Parents",
-    description: "",
-    image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*vJRcspNZQkdUpn9s.jpg",
-    date: "May 10, 2023",
-    readTime: "3 min read",
-    tags: [],
-    url: "https://medium.com/@pragyapokharel07_41704/building-bridges-with-parents-f0649629b661",
-    imageShift: 10
-  },
-  {
-    title: "Unwavering Passion for Learning",
-    description: "",
-    image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*LTRtwZheBiHmdLRpWlkO2g.jpeg",
-    date: "May 10, 2023",
-    readTime: "3 min read",
-    tags: [],
-    url: "https://medium.com/@pragyapokharel07_41704/unwavering-passion-for-learning-73a680a3f379",
-    imageShift: 10
-  },
-  {
-    title: "Teaching with Compassion",
-    description: "",
-    image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*w9eHFZll3GpyQTkZQFt5Jw.png",
-    date: "May 10, 2023",
-    readTime: "3 min read",
-    tags: [],
-    url: "https://medium.com/@pragyapokharel07_41704/teaching-with-compassion-46b79eddc8c6",
-  },
+  
   {
     title: "From Teacher to Advocate for Every Child",
     description: "",
@@ -247,9 +190,13 @@ export default function BlogPage() {
           <BookOpen className="h-8 w-8 text-primary" />
           <h1 className="text-4xl font-bold">Kaleidoscope</h1>
         </div>
-        <p className="text-muted-foreground mb-12">
-        A shifting mosaic of stories, colors, and moments
-        </p>
+        <div className='p-4 rounded bg-gray-100 my-4 border'>
+            <p className="text-muted-foreground text-justify text-gray-300">
+            Everybody has a story to tell, waiting to be discovered. 🙂
+
+Kaleidoscopes are covert instruments. One can never see the beautiful complex patterns and the colors that are on the inside. A couple of years ago, we (colleagues from Karkhana) borrowed this concept and came up with a series to reveal the depth and quirks of members and students of Karkhana. Kaleidoscope is a collection of such stories of wonderful people from Karkhana.
+            </p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post) => (

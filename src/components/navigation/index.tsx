@@ -83,11 +83,6 @@ const routes = [
     icon: Book
   },
   {
-    href: "/blog",
-    label: "Blog",
-    icon: PenTool
-  },
-  {
     href: "/contact",
     label: "Contact Me",
     icon: User
@@ -238,7 +233,7 @@ export function Navbar() {
   },[pathname])
 
   return (
-    <header className="sticky md:z-[1000] bg-white top-0 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky z-[1000] bg-white top-0 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center p-0 md:p-4">
         <div className="md:hidden">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -253,9 +248,9 @@ export function Navbar() {
                 </div>
               </div>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[240px] pr-0">
+            <SheetContent side="left" className="w-[240px] pr-0 z-[1001]">
               <SheetHeader>
-                <SheetTitle>Pragya Pokharel</SheetTitle>
+                <SheetTitle>{""}</SheetTitle>
                 <SheetDescription>
                   {""}
                 </SheetDescription>

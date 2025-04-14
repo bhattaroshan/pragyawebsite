@@ -9,7 +9,7 @@ import { Progress } from "@/components/ui/progress"
 const education = [
   {
     year: "2024-2029",
-    institution: "University of Nebraska, Lincoln",
+    institution: "University of Nebraska - Lincoln",
     location: "Nebraska, USA",
     url: "https://www.unl.edu/",
     skills: ["Technical Foundation",  "Academic Research"],
@@ -211,12 +211,12 @@ export default function EducationTimeline() {
                           <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
                             <div 
                               className="h-1.5 rounded-full bg-gray-800 dark:bg-gray-200 transition-all duration-500 ease-in-out"
-                              style={{ width: `${(index + 1) / education.length * 100}%` }}
+                              style={{ width: `${(education.length - index) / education.length * 100}%` }}
                             ></div>
                           </div>
                           <div className="flex justify-between mt-2 text-xs text-gray-500 dark:text-gray-400">
                             <span>{edu.milestone}</span>
-                            <span>{Math.round((index + 1) / education.length * 100)}% Complete</span>
+                            <span>{Math.round((education.length - index ) / education.length * 100)}% Complete</span>
                           </div>
                         </div>
                       </Card>

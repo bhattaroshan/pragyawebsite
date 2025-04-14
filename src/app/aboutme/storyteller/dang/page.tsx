@@ -19,6 +19,54 @@ const blogPosts = [
         url: "https://medium.com/@pragyapokharel07_41704/dreams-beyond-the-fields-63e1c1db8868",
         imageShift: 0 // No shift
       },
+      {
+        title: "Finding My Voice",
+        description: "",
+        image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*VwkJCA1Iwx0d5ICp.jpg",
+        date: "May 10, 2023",
+        readTime: "1 min read",
+        tags: [],
+        url: "https://medium.com/@pragyapokharel07_41704/finding-my-voice-4a8aa3713fd5",
+      },
+      {
+        title: "Walking Miles for a Future",
+        description: "",
+        image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*pvwOJtsjdYiMPMLg.jpg",
+        date: "May 10, 2023",
+        readTime: "2 min read",
+        tags: [],
+        url: "https://medium.com/@pragyapokharel07_41704/walking-miles-for-a-future-00506cefb654",
+        imageShift: 10
+      },
+      {
+        title: "Building Bridges with Parents",
+        description: "",
+        image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/0*vJRcspNZQkdUpn9s.jpg",
+        date: "May 10, 2023",
+        readTime: "3 min read",
+        tags: [],
+        url: "https://medium.com/@pragyapokharel07_41704/building-bridges-with-parents-f0649629b661",
+        imageShift: 10
+      },
+      {
+        title: "Unwavering Passion for Learning",
+        description: "",
+        image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*LTRtwZheBiHmdLRpWlkO2g.jpeg",
+        date: "May 10, 2023",
+        readTime: "3 min read",
+        tags: [],
+        url: "https://medium.com/@pragyapokharel07_41704/unwavering-passion-for-learning-73a680a3f379",
+        imageShift: 10
+      },
+      {
+        title: "Teaching with Compassion",
+        description: "",
+        image: "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*w9eHFZll3GpyQTkZQFt5Jw.png",
+        date: "May 10, 2023",
+        readTime: "3 min read",
+        tags: [],
+        url: "https://medium.com/@pragyapokharel07_41704/teaching-with-compassion-46b79eddc8c6",
+      },
 ]
 
 function BlogCard({ post }: { post: typeof blogPosts[0] }) {
@@ -90,9 +138,11 @@ export default function BlogPage() {
           <BookOpen className="h-8 w-8 text-primary" />
           <h1 className="text-4xl font-bold">Stories of Dang</h1>
         </div>
-        <p className="text-muted-foreground mb-12">
-        A shifting mosaic of stories, colors, and moments
-        </p>
+        <div className='p-4 rounded bg-gray-100 my-4 border'>
+            <p className="text-muted-foreground text-justify text-gray-300">
+                I joined Changing Stories Nepal as a Storyteller in December, 2019. Changing Stories Nepal is a non-profit organization established with a vision to build a Nepal where every kid learns. As a part of my job, I had the opportunity to travel to Tulsipur, Dang and gather stories of our talented students and fellows. The stories were published on the social media page of CS Nepal and will be published in newsletters to the monthly giving community called The Classroom.
+            </p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts.map((post) => (
